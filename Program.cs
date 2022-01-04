@@ -1,4 +1,5 @@
 using Kamenici.Data;
+using Kamenici.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -21,6 +22,9 @@ builder.Services.AddMvc(options =>
     var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
     options.Filters.Add(new AuthorizeFilter(policy));
 });
+builder.Services.AddScoped<IOrdersRepository, SQLOrderRepository>();
+builder.Services.AddScoped<IFramesRepository, SQLFramesRepository>();
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

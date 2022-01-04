@@ -1,0 +1,34 @@
+﻿@using Kamenici.Data
+@model IEnumerable<Order>
+@{
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>
+
+    </title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Order Id</th>
+                <th>Created Date</th>
+                <th>Due Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var order in Model)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>@order.OrderDate</td>
+                    <td>@order.DueDate</td>
+                    <td>@order.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
