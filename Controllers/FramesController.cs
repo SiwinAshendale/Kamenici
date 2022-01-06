@@ -42,12 +42,12 @@ namespace Kamenici.Controllers
             return View(model);
         }
         [HttpGet]
-        public async Task<IActionResult> EditFrame(int id)
+        public async Task<IActionResult> EditFrame(int frameid)
         {
-            var frame = _framesRepository.getFrame(id);
+            var frame = _framesRepository.getFrame(frameid);
             if (frame == null)
             {
-                ViewBag.ErrorMessage = $"Frame with Id = {id} cannot be found";
+                ViewBag.ErrorMessage = $"Frame with Id = {frameid} cannot be found";
                 return View("NotFound");
             }
             var model = new EditFrameViewModel
