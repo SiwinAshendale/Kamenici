@@ -1,0 +1,15 @@
+Kamenići
+
+Stranica namijenjena za zaprimanje narudžbi za Kameniće (https://www.instagram.com/thekamenici/). Omogućava registraciju i logiranje za korisnike.
+Također razdvaja korisnike na administratore i "ostale", administratori imaju pristup AdministrationControlleru kroz koji mogu:
+1. Upravljati sa rolama, tj. kreirati nove role po potrebi, primarno da mogu sami promovirati druge korisnike u administratore.
+2. Dodavati/mijenjati okvire (dimenzije okvira u pravilu određuju cijenu Kamenića) te po potrebi mijenjati dostupnost određenog okvira.
+3. Mogu mijenjati status narudžbi, svaka narudžba kada je unesena u sustav po defaultu (stavljeno u jedinom konstruktoru za model) ima status ="Pending"
+
+Krajnji korisnici mogu:
+1. Kreirati nove narudžbe - to rade preko NewOrder stranice koja je zapravo lista dostupnih okvira, asproutingom se sa liste okvira prebacuju na Create stranicu za narudžbe,
+ali sa sobom nose identifikator okvira za kojeg žele kreirati narudžbu.
+2. Pregledavati svoje postojeće narudžbe - praktički isti view kao AllOrders za administratore, samo što se u model koji se šalje u view stavljaju samo narudžbe kojima je
+createdbyid jednak identifikatoru trenutnog korisnika.
+
+Za postavljanje prvog administratora je potrebno maknuti [Authorize] tag s AdministrationControllera.
