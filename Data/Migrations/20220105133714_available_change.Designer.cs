@@ -4,6 +4,7 @@ using Kamenici.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kamenici.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220105133714_available_change")]
+    partial class available_change
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,11 +32,8 @@ namespace Kamenici.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FrameId"), 1L, 1);
 
-                    b.Property<bool?>("Available")
+                    b.Property<bool>("Available")
                         .HasColumnType("bit");
-
-                    b.Property<int?>("CreateOrderViewModelOrderId")
-                        .HasColumnType("int");
 
                     b.Property<string>("CreatedById")
                         .IsRequired()
@@ -50,8 +49,6 @@ namespace Kamenici.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("FrameId");
-
-                    b.HasIndex("CreateOrderViewModelOrderId");
 
                     b.HasIndex("CreatedById");
 
@@ -93,59 +90,6 @@ namespace Kamenici.Data.Migrations
                     b.HasIndex("FrameId");
 
                     b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("Kamenici.ViewModels.CreateOrderViewModel", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
-
-                    b.Property<DateTime>("DueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("FrameId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("OrderId");
-
-                    b.HasIndex("FrameId");
-
-                    b.ToTable("CreateOrderViewModel");
-                });
-
-            modelBuilder.Entity("Kamenici.ViewModels.DeleteFrameViewModel", b =>
-                {
-                    b.Property<int>("FrameId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FrameId"), 1L, 1);
-
-                    b.Property<bool>("Available")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Height")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Width")
-                        .HasColumnType("int");
-
-                    b.HasKey("FrameId");
-
-                    b.ToTable("DeleteFrameViewModel");
                 });
 
             modelBuilder.Entity("Kamenici.ViewModels.EditFrameViewModel", b =>
@@ -377,10 +321,6 @@ namespace Kamenici.Data.Migrations
 
             modelBuilder.Entity("Kamenici.Data.Frame", b =>
                 {
-                    b.HasOne("Kamenici.ViewModels.CreateOrderViewModel", null)
-                        .WithMany("FrameIds")
-                        .HasForeignKey("CreateOrderViewModelOrderId");
-
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
@@ -403,17 +343,6 @@ namespace Kamenici.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("CreatedByNavigation");
-
-                    b.Navigation("Frame");
-                });
-
-            modelBuilder.Entity("Kamenici.ViewModels.CreateOrderViewModel", b =>
-                {
-                    b.HasOne("Kamenici.Data.Frame", "Frame")
-                        .WithMany()
-                        .HasForeignKey("FrameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("Frame");
                 });
@@ -472,11 +401,6 @@ namespace Kamenici.Data.Migrations
             modelBuilder.Entity("Kamenici.Data.Frame", b =>
                 {
                     b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("Kamenici.ViewModels.CreateOrderViewModel", b =>
-                {
-                    b.Navigation("FrameIds");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
 namespace Kamenici.Data
 {
     public partial class Frame
     {
-        public Frame(int width, int height, int price, string createdbyid)
+        public Frame(int width, int height, int price, string CreatedById)
         {
             Available = true;
             Width = width;
             Height = height;
             Price = price;
-            CreatedById = createdbyid;
+            this.CreatedById = CreatedById;
 
         }
 

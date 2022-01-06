@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Kamenici.Data.Frame>
+
+@{
+    ViewData["Title"] = "All Frames";
+}
+
+<h1>All Frames</h1>
+
+<p>
+    <a asp-action="CreateFrame">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Width)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Height)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Available)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Width)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Available)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy.Id)
+            </td>
+            <td>
+                <a asp-action="EditFrame" asp-route-frameid="@item.FrameId">Edit</a> ||
+                <a asp-action="DeleteFrame"  asp-route-frameid="@item.FrameId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
